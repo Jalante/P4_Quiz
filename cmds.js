@@ -248,12 +248,14 @@ exports.testCmd = (rl, id) => {
 			respCase = resp.toLowerCase().trim();
 			quizAnswerCase =  quiz.answer.toLowerCase().trim();
 				if (respCase == quizAnswerCase) {
-					log(`Su respuesta es correcta. `);
-					biglog('CORRECTA', 'green');
+				log(`CORRECTA`);
+			//	log(`Su respuesta es correcta. `);
+			//	biglog('CORRECTA', 'green');
 					
 				} else {
-					log(`Su respuesta es incorrecta. `);
-					biglog('INCORRECTA', 'red');
+					log(`INCORRECTA`);
+					//log(`Su respuesta es incorrecta. `);
+					//biglog('INCORRECTA', 'red');
 				} 
 		});
 	})
@@ -280,7 +282,7 @@ exports.testCmd = (rl, id) => {
  * 
  */
  
-/**  exports.playCmd = rl => {
+  /** exports.playCmd = rl => {
 
 		const playOne = () => {
 			
