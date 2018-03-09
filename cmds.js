@@ -233,15 +233,14 @@ exports.editCmd = (rl, id) => {
  *
  * @param rl Objeto readline usado para implementar el CLI.
  * @param id Clave del quiz a probar.
- */
-exports.testCmd = (rl, id) => {
-
-
-/**
+ * 
+ * 
  * Validar si el id es correcto
  * Acceder a la BD para obtener la pregunta = edit
- * Preguntar por la pregunta asociada al quiz y comprobar si está bien o mal
+ * Preguntar por la pregunta asociada al quiz y comprobar si está bien o mal 
+ *
  */
+/**exports.testCmd = (rl, id) => {
 
 	if (typeof id === "undefined") {
 		errorlog(`Falta el parámetro id.`);
@@ -271,19 +270,19 @@ exports.testCmd = (rl, id) => {
 		}
 	}
 };
-
+/*
 
 /**
  * Pregunta todos los quizzes existentes en el modelo en orden aleatorio.
  * Se gana si se contesta a todos satisfactoriamente.
  *
  * @param rl Objeto readline usado para implementar el CLI.
+ * 
+ * Cargar en un array todas las preguntas al principio e ir eliminándolas según se van preguntando.
+ * 
  */
-exports.playCmd = rl => {
-
-	/**
-	 * Cargar en un array todas las preguntas al principio e ir eliminándolas según se van preguntando.
-	 */
+ 
+ /** exports.playCmd = rl => {
 
 		const playOne = () => {
 			
@@ -331,6 +330,7 @@ exports.playCmd = rl => {
 		playOne();
 
 };
+/*
 
 
 /** 
