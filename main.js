@@ -53,10 +53,10 @@ rl
 			cmds.showCmd(rl, args[1]);
 			break;
 		
-	//	case 'test':
-	//		cmds.testCmd(rl, args[1]);
-	//		break;
-			
+		case 'test':
+			cmds.testCmd(rl, args[1]);
+			break;
+		
 	//	case 'play':
 	//	case 'p':
 	//		cmds.playCmd(rl);

@@ -233,44 +233,42 @@ exports.editCmd = (rl, id) => {
  *
  * @param rl Objeto readline usado para implementar el CLI.
  * @param id Clave del quiz a probar.
- * 
- * 
- * Validar si el id es correcto
- * Acceder a la BD para obtener la pregunta = edit
- * Preguntar por la pregunta asociada al quiz y comprobar si está bien o mal 
  *
  */
-/**exports.testCmd = (rl, id) => {
+exports.testCmd = (rl, id) => {
 
-	if (typeof id === "undefined") {
-		errorlog(`Falta el parámetro id.`);
-		rl.prompt();
-	} else {
-		try {
-			
-			const quiz = model.getByIndex(id);
-						
-			rl.question("¿" + quiz.question + "? " , resp => {																														
-				respCase = resp.toLowerCase().trim();
-				quizAnswerCase =  quiz.answer.toLowerCase().trim();
-					if (respCase == quizAnswerCase) {
-						log(`Su respuesta es correcta. `);
-						biglog('CORRECTA', 'green');
-						
-					} else {
-						log(`Su respuesta es incorrecta. `);
-						biglog('INCORRECTA', 'red');
-					} 
-					
-					rl.prompt();
-			});
-		 } catch (error) {
-			errorlog(error.message);
-			rl.prompt();
+	validateId(id)
+	.then(id => models.quiz.findById(id))
+	.then(quiz => {
+		if(!quiz) {
+			throw new Error(`No existe un quiz asociado al id = {id}.`);
 		}
-	}
+		
+		rl.question("¿" + quiz.question + "? " , resp => {																														
+			respCase = resp.toLowerCase().trim();
+			quizAnswerCase =  quiz.answer.toLowerCase().trim();
+				if (respCase == quizAnswerCase) {
+					log(`Su respuesta es correcta. `);
+					biglog('CORRECTA', 'green');
+					
+				} else {
+					log(`Su respuesta es incorrecta. `);
+					biglog('INCORRECTA', 'red');
+				} 
+		});
+	})
+	.catch(Sequelize.ValidationError, error => {
+		errorlog('El quiz es erróneo: ');
+		error.errors.forEach(({message}) => errorlog(message));
+	})
+	.catch(error => {
+		errorlog(error.message);
+	})
+	.then(() => {
+		rl.prompt();
+	});
 };
-/*
+
 
 /**
  * Pregunta todos los quizzes existentes en el modelo en orden aleatorio.
@@ -282,7 +280,7 @@ exports.editCmd = (rl, id) => {
  * 
  */
  
- /** exports.playCmd = rl => {
+/**  exports.playCmd = rl => {
 
 		const playOne = () => {
 			
@@ -330,8 +328,8 @@ exports.editCmd = (rl, id) => {
 		playOne();
 
 };
-/*
 
+/*
 
 /** 
  * Muestra el nombre del autor de la práctica.
