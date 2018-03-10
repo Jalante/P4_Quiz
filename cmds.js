@@ -243,11 +243,12 @@ exports.testCmd = (rl, id) => {
 		if(!quiz) {
 			throw new Error(`No existe un quiz asociado al id = {id}.`);
 		}
-		return makeQuestion(rl, quiz.question)
+		return makeQuestion(rl, "¿" + quiz.question + "? ")
 			.then(q => {
-				respCase = resp.toLowerCase().trim();
+				//respCase = resp.toLowerCase().trim();
 				quizAnswerCase =  quiz.answer.toLowerCase().trim();
-				if (respCase == quizAnswerCase) {
+				//if (respCase === quizAnswerCase) {
+				if (q.toLowerCase().trim() === quizAnswerCase) {
 					log(`Su respuesta es correcta. `);
 					biglog('CORRECTA', 'green');
 
