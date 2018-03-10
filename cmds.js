@@ -1,4 +1,4 @@
-// import { count } from './model';
+ // import { count } from './model';
 
 const {models}  = require('./model');
 const {log, biglog, errorlog, colorize} = require("./out");
@@ -243,22 +243,20 @@ exports.testCmd = (rl, id) => {
 		if(!quiz) {
 			throw new Error(`No existe un quiz asociado al id = {id}.`);
 		}
-		
-		rl.question("¿" + quiz.question + "? " , resp => {																														
-			respCase = resp.toLowerCase().trim();
-			quizAnswerCase =  quiz.answer.toLowerCase().trim();
+		return makeQuestion(rl, quiz.question)
+			.then(q => {
+				respCase = resp.toLowerCase().trim();
+				quizAnswerCase =  quiz.answer.toLowerCase().trim();
 				if (respCase == quizAnswerCase) {
-				log(`CORRECTA`);
-			//	log(`Su respuesta es correcta. `);
-			//	biglog('CORRECTA', 'green');
-					
+					log(`Su respuesta es correcta. `);
+					biglog('CORRECTA', 'green');
+
 				} else {
-					log(`INCORRECTA`);
-					//log(`Su respuesta es incorrecta. `);
-					//biglog('INCORRECTA', 'red');
+					log(`Su respuesta es incorrecta. `);
+					biglog('INCORRECTA', 'red');
 				} 
-		});
-	})
+			});	
+		})
 	.catch(Sequelize.ValidationError, error => {
 		errorlog('El quiz es erróneo: ');
 		error.errors.forEach(({message}) => errorlog(message));
