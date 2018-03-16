@@ -57,10 +57,10 @@ rl
 			cmds.testCmd(rl, args[1]);
 			break;
 		
-	//	case 'play':
-	//	case 'p':
-	//		cmds.playCmd(rl);
-	//		break;
+		case 'play':
+		case 'p':
+			cmds.playCmd(rl);
+			break;
 		
 		case 'delete':
 			cmds.deleteCmd(rl, args[1]);
@@ -81,11 +81,6 @@ rl
 			break;
 	}
 })
-/*.on('close', () => {
-	log('¡Adiós!');
-	process.exit(0);
-});
-*/
 
 .on('close', () => {
 	log(`${colorize('¡Adiós!' , 'blue')}`);
