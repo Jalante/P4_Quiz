@@ -9,7 +9,7 @@ const chalk = require('chalk');
  * @param color			Es el color con el que se pinta el msg.
  * @returns {string}	Devuelve el string msg con el color indicado.
  */
-const colorize = (msg, color) => {
+ const colorize = (msg, color) => {
 	
 	if (typeof color !== "undefined") {
 		msg = chalk[color].bold(msg);
@@ -24,9 +24,9 @@ const colorize = (msg, color) => {
  * @param msg			Texto a escribir.
  * @param color			Color del texto.
  */
-const log = (msg, color) => {
+const log = (socket, msg, color) => {
 	
-	console.log(colorize(msg, color));
+	socket.write(colorize(msg, color) + "\n");
 };
 
 
@@ -36,9 +36,9 @@ const log = (msg, color) => {
  * @param msg			Texto a escribir
  * @param color			Color del texto.
  */
-const biglog = (msg, color) => {
+const biglog = (socket, msg, color) => {
 	
-	log(figlet.textSync(msg, {horizontalLayout: 'full' }), color);
+	log(socket, figlet.textSync(msg, {horizontalLayout: 'full' }), color);
 };
 
 
@@ -47,9 +47,9 @@ const biglog = (msg, color) => {
  *
  * @param msg			Texto del mensaje de error.
  */
-const errorlog = (emsg) => {
+const errorlog = (socket, emsg) => {
 	
-	console.log(`${colorize("Error", "red")}: ${colorize(colorize(emsg, "red"), "bgYellow")}`);
+	socket.write(`${colorize("Error", "red")}: ${colorize(colorize(emsg, "red"), "bgYellow")}\n`);
 };
 
 exports = module.exports = {
@@ -57,4 +57,4 @@ exports = module.exports = {
 	log,
 	biglog,
 	errorlog
-}
+};
